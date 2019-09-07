@@ -1,7 +1,4 @@
 # gcc-i686-posix-sjlj-for-MSYS
--------------------------------------------------------------------------------
-gcc version gcc-9.2.1-20190906-73e5580 --enable-sjlj-exceptions 
--------------------------------------------------------------------------------
 export CPP=/mingw/bin/cpp \
 export LD_LIBRARY_PATH=/usr/local/lib \
 export LIBS= \
