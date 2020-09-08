@@ -1,5 +1,5 @@
 # gcc-i686-posix-sjlj-for-MSYS
-
+<pre>
 $ export CPP=/mingw/bin/cpp \
 export LD_LIBRARY_PATH=/usr/local/lib \
 export LIBS= \
@@ -23,3 +23,4 @@ Configured with: ../gcc-10/configure --prefix=/mingw32 --with-local-prefix=/ming
 Thread model: posix
 Supported LTO compression algorithms: zlib zstd
 gcc version 10.2.1 20200907 (GCC)
+</pre>
