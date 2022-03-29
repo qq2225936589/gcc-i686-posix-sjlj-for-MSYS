@@ -1,0 +1,56 @@
+--- gcc-11/libstdc++-v3/libsupc++/del_opa.cc.orig-code	2020-09-07 15:18:47 +0800
++++ gcc-11/libstdc++-v3/libsupc++/del_opa.cc	2020-09-08 12:21:13 +0800
+@@ -24,6 +24,7 @@
+ // <http://www.gnu.org/licenses/>.
+ 
+ #include <bits/c++config.h>
++#include <malloc.h>
+ 
+ #if !_GLIBCXX_HOSTED
+ // A freestanding C runtime may not provide "free" -- but there is no
+@@ -50,7 +51,7 @@
+     || _GLIBCXX_HAVE_MEMALIGN
+   std::free (ptr);
+ #elif _GLIBCXX_HAVE__ALIGNED_MALLOC
+-  _aligned_free (ptr);
++  __mingw_aligned_free (ptr);
+ #else
+   if (ptr)
+     std::free (((void **) ptr)[-1]); // See aligned_alloc in new_opa.cc
+--- gcc-11/libstdc++-v3/libsupc++/new_opa.cc.orig-code	2020-09-07 15:18:47 +0800
++++ gcc-11/libstdc++-v3/libsupc++/new_opa.cc	2020-09-08 12:24:39 +0800
+@@ -24,6 +24,7 @@
+ // <http://www.gnu.org/licenses/>.
+ 
+ #include <bits/c++config.h>
++#include <malloc.h>
+ #include <stdlib.h>
+ #include <stdint.h>
+ #include <bits/exception_defines.h>
+@@ -64,7 +65,7 @@
+ #elif _GLIBCXX_HAVE__ALIGNED_MALLOC
+ static inline void*
+ aligned_alloc (std::size_t al, std::size_t sz)
+-{ return _aligned_malloc(sz, al); }
++{ return __mingw_aligned_malloc(sz, al); }
+ #elif _GLIBCXX_HAVE_POSIX_MEMALIGN
+ static inline void*
+ aligned_alloc (std::size_t al, std::size_t sz)
+--- gcc-11/gcc/pretty-print.c.orig-code	2020-09-07 15:18:47 +0800
++++ gcc-11/gcc/pretty-print.c	2020-09-08 12:16:18 +0800
+@@ -43,6 +43,14 @@
+ #define WIN32_LEAN_AND_MEAN 1
+ #include <windows.h>
+ 
++#ifndef COMMON_LVB_REVERSE_VIDEO
++#define COMMON_LVB_REVERSE_VIDEO 0x4000
++#endif
++
++#ifndef COMMON_LVB_UNDERSCORE
++#define COMMON_LVB_UNDERSCORE 0x8000
++#endif
++
+ /* Write all bytes in [s,s+n) into the specified stream.
+    Errors are ignored.  */
+ static void
+
