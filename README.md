@@ -24,5 +24,5 @@ Configured with: ../gcc-11/configure --prefix=/mingw32 --with-local-prefix=/ming
 <pre>
 Thread model: posix
 Supported LTO compression algorithms: zlib zstd
-gcc version 11.2.1 20220101 (GCC)
+gcc version 11.2.1 20220329 (GCC)
 </pre>
